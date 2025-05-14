@@ -22,8 +22,11 @@
 .logo {
 }
 
-.search {
+.search-result, .search {
     width: 361px;
+}
+
+.search {
     height: var(--search-height);
     background-color: rgba(22, 24, 35, 0.06);
     border-radius: var(--search-border-radius);
@@ -46,9 +49,8 @@
         color: rgba(22, 24, 35, 0.72);
     }
 
-
     &::after {
-        content: "";
+        content: '';
         position: absolute;
         height: calc(var(--search-height) - var(--search-top-spacer));
         width: 1px;
@@ -84,10 +86,17 @@
         background-color: rgba(22, 24, 35, 0.04);
     }
 
-     &:active {
+    &:active {
         background-color: rgba(22, 24, 35, 0.06);
     }
 }
 
 .actions {
 }
+
+.search-title {
+    color: rgba(22, 24, 35, 0.5);
+    padding: 5px 12px;
+    font-weight: 500;
+}
+
