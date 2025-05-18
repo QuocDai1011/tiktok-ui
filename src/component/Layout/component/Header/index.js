@@ -14,29 +14,56 @@ import {
     faCircleInfo,
     faKeyboard,
 } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { Children, useState } from 'react';
 import { Wrapper as PopperWrapper } from '~/component/Popper';
 import AccountItem from '~/component/AccountItem';
 import Button from '~/component/Button';
 import Menu from '~/component/Popper/Menu';
+import { type } from '@testing-library/user-event/dist/type';
 
 const cx = classNames.bind(styles);
 
 const MENU_ITEM = [
     {
         icon: <FontAwesomeIcon icon={faLanguage} />,
-        title: 'English'
+        title: 'English',
+        children: {
+            title: 'Language',
+            data: [
+                {
+                    type: 'language',
+                    code: 'en',
+                    title: 'English',
+                },
+                {
+                    type: 'language',
+                    code: 'vi',
+                    title: 'Tiếng Việt',
+                },
+            ],
+        },
     },
     {
         icon: <FontAwesomeIcon icon={faCircleInfo} />,
         title: 'Feadback and help',
-        to: '/feedback'
+        to: '/feedback',
     },
     {
         icon: <FontAwesomeIcon icon={faKeyboard} />,
-        title: 'Keyboard shortcuts'
+        title: 'Keyboard shortcuts',
+    },
+];
+
+const handleMenuChange = (menuItem) => {
+    switch (menuItem.type) {
+        case 'language': {
+            alert(menuItem.code);
+            break;
+        }
+        default:
+            break;
     }
-]
+};
 
 function Header() {
     const [searchResult, setSearchResult] = useState(['hello']);
@@ -76,9 +103,7 @@ function Header() {
                     <Button text>Upload</Button>
                     <Button primary>Log in</Button>
 
-                    <Menu
-                        items = {MENU_ITEM}
-                    >
+                    <Menu items={MENU_ITEM} onChange={handleMenuChange}>
                         <button className={cx('more-btn')}>
                             <FontAwesomeIcon icon={faBars} />
                         </button>

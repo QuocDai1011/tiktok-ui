@@ -6,10 +6,11 @@
 
     // DefaultLayout
     --default-layout-header-height: 60px;
+    --default-layout-horizontal-spacer: 20px;
     --default-layout-width: 1150px;
     --black-color: #000;
     --text-color: #333;
-    --white-color: #fff
+    --white-color: #fff;
 }
 
 * {
@@ -30,7 +31,9 @@ body {
     text-rendering: optimizeSpeed;
 }
 
-button, input, [tabindex] {
+button,
+input,
+[tabindex] {
     outline: none;
     border: none;
 }
