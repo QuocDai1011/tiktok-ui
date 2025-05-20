@@ -21,11 +21,14 @@
     cursor: pointer;
     line-height: 1.8rem;
 
+    &.separate {
+        border-top: 1px solid rgba(22, 24, 35, 0.12);
+    }
+
     &:hover {
         background-color: rgba(22, 24, 35, 0.05);
     }
 }
-
 
 //Header
 .header {
@@ -50,7 +53,4 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-
-    
 }
-
