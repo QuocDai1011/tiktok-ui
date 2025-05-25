@@ -1,5 +1,4 @@
 @import 'normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wdth,wght@0,75..100,100..900;1,75..100,100..900&display=swap');
 
 :root {
     --primary: #fe2c55;
@@ -21,14 +20,40 @@
 
 html {
     font-size: 62.5%;
+    font-family: 'TikTokFont', sans-serif;
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'TikTokFont', sans-serif;
     font-optical-sizing: auto;
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizeSpeed;
+}
+
+//Fonts embeded
+@font-face {
+    font-family: TikTokFont;
+    src: url('../../assets/fonts/TikTokFont-Bold.woff2') format('woff2');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: TikTokFont;
+    src: url('../../assets/fonts/TikTokFont-Semibold.woff2') format('woff2');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: TikTokFont;
+    src: url('../../assets/fonts/TikTokFont-Regular.woff2') format('woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: TikTokDisplayFont;
+    src: url('../../assets/fonts/TikTokDisplayFont-Bold.woff2') format('woff2');
+    font-weight: 700;
 }
 
 button,
@@ -43,7 +68,7 @@ a[href] {
     text-decoration: none;
 }
 
-body{
+body {
     .custom {
         border-radius: 8px;
         font-weight: 400;
@@ -53,7 +78,7 @@ body{
     }
 
     .tippy-arrow {
-        color: rgba(84, 84, 84, 0.92) ;
+        color: rgba(84, 84, 84, 0.92);
     }
 
     .tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
@@ -61,6 +86,6 @@ body{
     }
 
     .tippy-content {
-        padding: 8px 9px;;
+        padding: 8px 9px;
     }
 }
