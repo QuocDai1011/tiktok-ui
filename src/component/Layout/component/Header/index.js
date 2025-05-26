@@ -31,6 +31,7 @@ import Menu from '~/component/Popper/Menu';
 import 'tippy.js/dist/tippy.css';
 import { InboxIcon, Message, SearchIcon, SendIcon, UploadIcon } from '~/component/Icons';
 import Image from '~/component/Image';
+import Search from '../Search';
 
 const cx = classNames.bind(styles);
 
@@ -102,8 +103,7 @@ const userMenu = [
 ];
 
 function Header() {
-    const [searchResult, setSearchResult] = useState(['hello']);
-
+    
     const currentUser = true;
 
     return (
@@ -112,31 +112,9 @@ function Header() {
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="Tiktok" />
                 </div>
-                <HeadlessTippy
-                    interactive
-                    visible={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                {/* <h4 className={cx('search-title')}>
-                                    Accounts
-                                </h4> */}
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')} spellCheck={false}>
-                        <input placeholder="Search accounts and videos" />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
-
-                        <button className={cx('search-btn')}>
-                            <SearchIcon />
-                        </button>
-                    </div>
-                </HeadlessTippy>
+                
+                {/* Search */}
+                <Search />
 
                 <div className={cx('actions')}>
                     {currentUser ? (
