@@ -21,6 +21,7 @@
 }
 
 .logo {
+    display: flex;
 }
 
 
@@ -59,7 +60,7 @@
     border-radius: 10px;
     font-weight: 600;
     color: var(--white-color);
-    font-family: 'TikTokFont', sans-serif;
+    font-family: var(--font-family);
     background-color: var(--primary);
 }
 

@@ -8,6 +8,10 @@ import classNames from 'classnames/bind';
 import styles from './Search.module.scss';
 import { SearchIcon } from '~/component/Icons';
 import { useEffect, useState, useRef } from 'react';
+import { useDebound } from '~/hooks';
+import * as request from '~/utils/request';
+import * as searchService from '~/apiServices/searchService';
+// import { type } from '@testing-library/user-event/dist/type';
 
 const cx = classNames.bind(styles);
 
@@ -16,31 +20,49 @@ function Search() {
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
+
+    const debounded = useDebound(searchValue, 700);
+
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounded.trim()) {
             setSearchResult([]);
             return;
         }
 
+        const fetchApi = async () => {
+            setLoading(true);
+
+            const result = await searchService.search(debounded);
+            setSearchResult(result);
+
+            setLoading(false);
+        };
+
+        fetchApi();
+
         setLoading(true);
 
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
-            .then((res) => res.json())
-            .then((res) => {
-                setSearchResult(res.data);
-                setLoading(false);
-            });
-    }, [searchValue]);
+        fetchApi();
+    }, [debounded]);
 
-    const hanldeHideResult = () => {
+    const handleHideResult = () => {
         setShowResult(false);
     };
 
-    const hanldeHideClear = () => {
+    const handleHideClear = () => {
         setSearchValue('');
         inputRef.current.focus();
+    };
+
+    const handleChange = (e) => {
+        const value = e.target.value;
+
+        // Không cho nhập nếu bắt đầu bằng dấu cách
+        if (!value.startsWith(' ')) {
+            setSearchValue(value);
+        }
     };
 
     return (
@@ -60,7 +82,7 @@ function Search() {
                     </PopperWrapper>
                 </div>
             )}
-            onClickOutside={hanldeHideResult}
+            onClickOutside={handleHideResult}
         >
             <div className={cx('search')}>
                 <input
@@ -68,22 +90,25 @@ function Search() {
                     value={searchValue}
                     placeholder="Search accounts and videos"
                     spellCheck={false}
-                    onChange={(e) => {
-                        setSearchValue(e.target.value);
-                    }}
+                    onChange={handleChange}
                     onFocus={() => {
                         setShowResult(true);
                     }}
                 />
 
                 {!!searchValue && !loading && (
-                    <button className={cx('clear')} onClick={hanldeHideClear}>
+                    <button className={cx('clear')} onClick={handleHideClear}>
                         <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
                 )}
                 {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
 
-                <button className={cx('search-btn')}>
+                <button
+                    className={cx('search-btn')}
+                    onMouseDown={(e) => {
+                        e.preventDefault();
+                    }}
+                >
                     <SearchIcon />
                 </button>
             </div>

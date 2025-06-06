@@ -20,6 +20,7 @@
         padding: 0px 4px;
         background: transparent;
         caret-color: var(--primary);
+        font-family: var(--font-family);
     }
 
     input:not(:placeholder-shown) ~ .search-btn {
@@ -57,7 +58,8 @@
 @keyframes spinner {
     from {
         transform: translateY(-50%) rotate(0);
-    }to {
+    }
+    to {
         transform: translateY(-50%) rotate(360deg);
     }
 }

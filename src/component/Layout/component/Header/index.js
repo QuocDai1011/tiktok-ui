@@ -32,6 +32,7 @@ import 'tippy.js/dist/tippy.css';
 import { InboxIcon, Message, SearchIcon, SendIcon, UploadIcon } from '~/component/Icons';
 import Image from '~/component/Image';
 import Search from '../Search';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -103,16 +104,15 @@ const userMenu = [
 ];
 
 function Header() {
-    
     const currentUser = true;
 
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
+                <Link to="/" className={cx('logo')}>
                     <img src={images.logo} alt="Tiktok" />
-                </div>
-                
+                </Link>
+
                 {/* Search */}
                 <Search />
 
@@ -149,7 +149,7 @@ function Header() {
                                 className={cx('user-avt')}
                                 src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t39.30808-6/481243678_1869668697195110_1810427324316665394_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=RkGlVmvEuo0Q7kNvwEBsLgf&_nc_oc=AdmvtnEJHv2E0kLISmEmVX3tTM65TFK0eElAXRSEYbVP4Ugx7DV-u4XLSvgmH7__EAs&_nc_zt=23&_nc_ht=scontent.fsgn5-3.fna&_nc_gid=0ECPg3_z3z9bZA5wxL9wgQ&oh=00_AfKD49HsGsRizI6JmOhqFrpZ2cSHixj1k0JKxVYqm6Y8zA&oe=6835CC53"
                                 alt="Mai Quoc Dai"
-                                // fallback="https://scontent.fsgn15-1.fna.fbcdn.net/v/t39.30808-6/499795355_4059632490983148_6617147514241556234_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=tYUpkzc3DMkQ7kNvwF6w85e&_nc_oc=AdlggKxiiSenYyaKxd6OuJr6jNF7BUZ3MOpsuSvBXZsp3MmnTjd1JEZdUAXQR4w_zfzUjX9hHdCzDXkR1LaDojO2&_nc_zt=23&_nc_ht=scontent.fsgn15-1.fna&_nc_gid=-8hbxH4Y9chraDS_fmHJ6g&oh=00_AfI53aOLc-J9d-W4F4cBXrW7q3c9ciHxDqtM9noqlOtxeA&oe=68372D85"
+                                //fallback="https://scontent.fsgn15-1.fna.fbcdn.net/v/t39.30808-6/499795355_4059632490983148_6617147514241556234_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=tYUpkzc3DMkQ7kNvwF6w85e&_nc_oc=AdlggKxiiSenYyaKxd6OuJr6jNF7BUZ3MOpsuSvBXZsp3MmnTjd1JEZdUAXQR4w_zfzUjX9hHdCzDXkR1LaDojO2&_nc_zt=23&_nc_ht=scontent.fsgn15-1.fna&_nc_gid=-8hbxH4Y9chraDS_fmHJ6g&oh=00_AfI53aOLc-J9d-W4F4cBXrW7q3c9ciHxDqtM9noqlOtxeA&oe=68372D85"
                             />
                         ) : (
                             <button className={cx('more-btn')}>
