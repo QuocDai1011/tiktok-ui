@@ -9,9 +9,7 @@ import styles from './Search.module.scss';
 import { SearchIcon } from '~/component/Icons';
 import { useEffect, useState, useRef } from 'react';
 import { useDebound } from '~/hooks';
-import * as request from '~/utils/request';
-import * as searchService from '~/apiServices/searchService';
-// import { type } from '@testing-library/user-event/dist/type';
+import * as searchService from '~/services/searchService';
 
 const cx = classNames.bind(styles);
 
@@ -96,14 +94,14 @@ function Search() {
                             setShowResult(true);
                         }}
                     />
-    
+
                     {!!searchValue && !loading && (
                         <button className={cx('clear')} onClick={handleHideClear}>
                             <FontAwesomeIcon icon={faCircleXmark} />
                         </button>
                     )}
                     {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />}
-    
+
                     <button
                         className={cx('search-btn')}
                         onMouseDown={(e) => {
