@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 const cx = classNames.bind(styles);
 const defaultFn = () => {};
 
-function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false , ...passProps}) {
+function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false, ...passProps }) {
     const [history, setHistory] = useState([{ data: items }]);
     const current = history[history.length - 1];
 
@@ -34,6 +34,23 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false 
         });
     };
 
+    const handleBack = () => {
+        setHistory((prev) => prev.slice(0, prev.length - 1));
+    };
+
+    const renderResult = (attrs) => (
+        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
+            <PopperWrapper className={cx('menu-popper')}>
+                {history.length > 1 && <Header title={current.title} onBack={handleBack} />}
+                <div className={cx('menu-body')}>{renderItems()}</div>
+            </PopperWrapper>
+        </div>
+    );
+
+    const handleResetToFirstPage = () => {
+        setHistory((prev) => prev.slice(0, 1));
+    };
+
     return (
         <Tippy
             hideOnClick={hideOnClick}
@@ -41,22 +58,8 @@ function Menu({ children, items = [], onChange = defaultFn, hideOnClick = false 
             placement="bottom-end"
             interactive
             delay={[100, 500]}
-            render={(attrs) => (
-                <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-                    <PopperWrapper className={cx('menu-popper')}>
-                        {history.length > 1 && (
-                            <Header
-                                title={current.title}
-                                onBack={() => {
-                                    setHistory((prev) => prev.slice(0, prev.length - 1));
-                                }}
-                            />
-                        )}
-                        <div className={cx('menu-body')}>{renderItems()}</div>
-                    </PopperWrapper>
-                </div>
-            )}
-            onHide={() => setHistory((prev) => prev.slice(0, 1))}
+            render={renderResult}
+            onHide={handleResetToFirstPage}
             {...passProps}
         >
             {children}
@@ -69,6 +72,6 @@ Menu.propTypes = {
     items: PropTypes.array,
     onChange: PropTypes.func,
     hideOnClick: PropTypes.bool,
-}
+};
 
 export default Menu;
